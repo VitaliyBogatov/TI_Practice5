@@ -35,7 +35,7 @@ namespace TI_Practice5
             foreach (var el in names)
             {
                 if (names.Length > i)
-                {
+                {   
                     severity += el+",";
                     i++;
                 }
