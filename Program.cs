@@ -14,7 +14,8 @@ namespace TI_Practice5
         {
             char newTask = 'y';
 
-            ArrayList tasks = new ArrayList();
+            //ArrayList tasks = new ArrayList();
+            List<Task> tasks = new List<Task>();
 
 
             while (newTask.Equals('y'))
@@ -55,7 +56,7 @@ namespace TI_Practice5
                 "\n1. Count total hours by all tasks." +
                 "\n2. Return all tasks by priority." +
                 "\n3. Tasks those can be done in N days by priority."+
-                "\nPlease choose an option... ");
+                "\nPlease choose an option...  ");
 
             char action = Console.ReadKey().KeyChar;
 
