@@ -12,10 +12,33 @@ namespace TI_Practice5
     {
         static void Main(string[] args)
         {
-            char newTask = 'y';
-
-            //ArrayList tasks = new ArrayList();
             List<Task> tasks = new List<Task>();
+
+
+            Console.Write("Please choose an action:" +
+                         "\n1. Count total hours by all tasks." +
+                         "\n2. Return all tasks by priority." +
+                         "\n3. Tasks those can be done in N days by priority." +
+                         "\nPlease choose an option...  ");
+
+
+            char action = Console.ReadKey().KeyChar;
+
+            switch (action)
+            {
+                case '1':
+                    decimal totalTime = 0;
+                    foreach (Task task in tasks)
+                    {
+                        totalTime += task.GetTime();
+                    }
+                    Console.Write($"\nTotal time for all tasks execution is {totalTime}");
+                    break;
+            }
+
+            
+            
+            char newTask = 'y';
 
 
             while (newTask.Equals('y'))
@@ -51,26 +74,6 @@ namespace TI_Practice5
             //{
             //    task.GetTask();
             //}
-
-            Console.Write("Please choose an action:" +
-                "\n1. Count total hours by all tasks." +
-                "\n2. Return all tasks by priority." +
-                "\n3. Tasks those can be done in N days by priority."+
-                "\nPlease choose an option...  ");
-
-            char action = Console.ReadKey().KeyChar;
-
-            switch (action)
-            {
-                case '1':
-                    decimal totalTime = 0;
-                    foreach (Task task in tasks)
-                    {
-                        totalTime += task.GetTime();
-                    }
-                    Console.Write($"\nTotal time for all tasks execution is {totalTime}");
-                    break;
-            }
 
             Console.ReadKey();
         }
