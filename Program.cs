@@ -36,7 +36,7 @@ namespace TI_Practice5
 
                 tasks.Add(tsk);
 
-                Console.Write("Do you want add one more task (y/n)?");
+                Console.Write("\nDo you want add one more task (y/n)?");
                 newTask = Console.ReadKey().KeyChar;
                 Console.Write("\n\n");
 
@@ -46,10 +46,31 @@ namespace TI_Practice5
                 }
             }
 
-            foreach (Task task in tasks)
+            //foreach (Task task in tasks)
+            //{
+            //    task.GetTask();
+            //}
+
+            Console.Write("Please choose an action:" +
+                "\n1. Count total hours by all tasks." +
+                "\n2. Return all tasks by priority." +
+                "\n3. Tasks those can be done in N days by priority."+
+                "\nPlease choose an option... ");
+
+            char action = Console.ReadKey().KeyChar;
+
+            switch (action)
             {
-                task.GetTask();
+                case '1':
+                    decimal totalTime = 0;
+                    foreach (Task task in tasks)
+                    {
+                        totalTime += task.GetTime();
+                    }
+                    Console.Write($"\nTotal time for all tasks execution is {totalTime}");
+                    break;
             }
+
             Console.ReadKey();
         }
     }

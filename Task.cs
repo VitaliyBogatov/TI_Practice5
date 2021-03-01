@@ -100,5 +100,11 @@ namespace TI_Practice5
             Console.WriteLine($"Task severity: {Enum.Parse(typeof(TaskEnums.TaskSeverity), tskSeverity.ToString())}.");
             Console.WriteLine($"Task execution time: {Enum.Parse(typeof(TaskEnums.TaskExecutionPeriod), tskExecutionTime.ToString())}.");
         }
+
+        public decimal GetTime()
+        {
+            decimal time = Convert.ToDecimal(Enum.Parse(typeof(TaskEnums.TaskExecutionPeriod), tskExecutionTime.ToString()));
+            return time;
+        }
     }
 }
