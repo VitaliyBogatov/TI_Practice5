@@ -3,10 +3,11 @@ using System;
 
 namespace TI_Practice5
 {
-    class TaskEnums{
+    public class TaskEnums{
 
         public enum TaskPriority
         {
+            Undefined = 0,
             High = 1,
             Medium = 2,
             Low = 3
@@ -14,6 +15,7 @@ namespace TI_Practice5
 
         public enum TaskSeverity
         {
+            Undefined = 0,
             Major = 1,
             Moderate = 2,
             Low = 3
@@ -21,27 +23,24 @@ namespace TI_Practice5
 
         public enum TaskExecutionPeriod
         {
-            Complex = 8,
+            Undefined = 0,
+            Trivial = 2,
             Middle = 4,
-            Trivial = 2
+            Complex = 8
         }
 
         public static string GetSeverities()
         {
+            string name;
             string severity = "";
-            var names = Enum.GetNames(typeof(TaskEnums.TaskSeverity));
+            Array names = Enum.GetValues(typeof(TaskEnums.TaskSeverity));
 
-            int i = 1;
-            foreach (var el in names)
+            foreach (int value in names)
             {
-                if (names.Length > i)
-                {   
-                    severity += el+",";
-                    i++;
-                }
-                else
+                if (value != TaskSeverity.Undefined.GetHashCode())
                 {
-                    severity += el;
+                    name = Enum.GetName(typeof(TaskEnums.TaskSeverity), value);
+                    severity += $"\n- {name}: {value}.";
                 }
             }
             return severity;
@@ -49,43 +48,101 @@ namespace TI_Practice5
 
         public static string GetPriorities()
         {
+            string name;
             string priority = "";
-            var names = Enum.GetNames(typeof(TaskEnums.TaskPriority));
+            Array names = Enum.GetValues(typeof(TaskEnums.TaskPriority));
 
-            int i = 0;
-            foreach (var el in names)
+            foreach (int value in names)
             {
-                if (names.Length - 1 != i)
+                if (value != TaskPriority.Undefined.GetHashCode())
                 {
-                    priority += el + ",";
-                    i++;
-                }
-                else
-                {
-                    priority += el;
+                    name = Enum.GetName(typeof(TaskEnums.TaskPriority), value);
+                    priority += $"\n- {name}: {value}.";
                 }
             }
             return priority;
         }
         public static string GetExecutioPeriods()
         {
+            string name;
             string execution = "";
-            var names = Enum.GetNames(typeof(TaskEnums.TaskExecutionPeriod));
+            Array names = Enum.GetValues(typeof(TaskExecutionPeriod));
 
-            int i = 0;
-            foreach (var el in names)
+            foreach (int value in names)
             {
-                if (names.Length - 1 != i)
+                if (value != TaskExecutionPeriod.Undefined.GetHashCode())
                 {
-                    execution += el + ",";
-                    i++;
-                }
-                else
-                {
-                    execution += el;
+                    name = Enum.GetName(typeof(TaskExecutionPeriod), value);
+                    execution += $"\n- {name}: {value} hours.";
                 }
             }
             return execution;
+        }
+
+        public static TaskPriority VaidatePriority(string priority)
+        {
+                try
+                {
+                    TaskPriority tskPriority = (TaskPriority)Enum.Parse(typeof(TaskPriority), priority, true);
+                    if (!Enum.IsDefined(typeof(TaskPriority), tskPriority) || tskPriority == TaskPriority.Undefined)
+                    {
+                        Console.Write($"{priority} is not an underlying value of the Priority enumeration. Please set a valid value: ");
+                        return TaskPriority.Undefined;
+                    }
+                    else
+                    {
+                        return tskPriority;
+                    }
+                }
+                catch (ArgumentException)
+                {
+                    Console.Write("{0} is not a member of the Priority enumeration. Please set a valid value: ", priority);
+                    return TaskPriority.Undefined;
+                }
+        }
+
+         public static TaskSeverity ValidateSeverity(string severity)
+         {
+            try
+            {
+                TaskSeverity tskSeverity = (TaskSeverity)Enum.Parse(typeof(TaskSeverity), severity, true);
+                if (!Enum.IsDefined(typeof(TaskSeverity), tskSeverity) || tskSeverity == TaskSeverity.Undefined)
+                {
+                    Console.Write($"{severity} is not an underlying value of the Severity enumeration. Please set a valid value: ");
+                    return TaskSeverity.Undefined;
+                }
+                else
+                {
+                    return tskSeverity;
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.Write("{0} is not a member of the Severity enumeration. Please set a valid value: ", severity);
+                return TaskSeverity.Undefined;
+            }
+         }
+
+        public static TaskExecutionPeriod ValidateExecutionTime(string executionTime)
+        {
+            try
+            {
+                TaskExecutionPeriod tskExecutionTime = (TaskExecutionPeriod)Enum.Parse(typeof(TaskExecutionPeriod), executionTime, true);
+                if (!Enum.IsDefined(typeof(TaskExecutionPeriod), tskExecutionTime) || tskExecutionTime == TaskExecutionPeriod.Undefined)
+                {
+                    Console.Write($"{executionTime} is not an underlying value of the ExexutionPeriod enumeration. Please set a valid value: ");
+                    return TaskExecutionPeriod.Undefined;
+                }
+                else
+                {
+                    return tskExecutionTime;
+                }
+            }
+            catch (ArgumentException)
+            {
+                Console.Write("{0} is not a member of the ExexutionPeriod enumeration. Please set a valid value: ", executionTime);
+                return TaskExecutionPeriod.Undefined;
+            }
         }
     }
 }
